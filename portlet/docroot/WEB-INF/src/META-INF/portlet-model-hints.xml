@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="gr.open.marketplace.model.AdminIPConfiguration">
+		<field name="id" type="long" />
+		<field name="redirectUrl" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="debug" type="boolean" />
+		<field name="mode" type="int" />
+	</model>
+	<model name="gr.open.marketplace.model.AdminIPValidationData">
+		<field name="id" type="long" />
+		<field name="ipAddresses" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+		<field name="roles" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="notes" type="String">
+			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="active" type="boolean" />
+	</model>
+</model-hints>

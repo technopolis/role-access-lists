@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="gr.open.marketplace.model.impl.AdminIPConfigurationModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="redirectUrl" />
+			<basic name="debug" />
+			<basic name="mode">
+				<column name="MODE_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="gr.open.marketplace.model.impl.AdminIPValidationDataModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="ipAddresses" />
+			<basic name="roles" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="notes" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="gr.open.marketplace.model.impl.AdminIPConfigurationImpl" name="AdminIPConfiguration">
+		<table name="opengr_AdminIPConfiguration" />
+		<attributes />
+	</entity>
+	<entity class="gr.open.marketplace.model.impl.AdminIPValidationDataImpl" name="AdminIPValidationData">
+		<table name="opengr_AdminIPValidationData" />
+		<attributes />
+	</entity>
+</entity-mappings>

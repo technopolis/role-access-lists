@@ -1,0 +1,113 @@
+package gr.open.marketplace.hook.actions;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.struts.BaseStrutsAction;
+import com.liferay.portal.kernel.struts.StrutsAction;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+
+import gr.open.marketplace.hook.Constants;
+import gr.open.marketplace.hook.HookHelper;
+import gr.open.marketplace.model.AdminIPConfiguration;
+import gr.open.marketplace.model.AdminIPValidationData;
+import gr.open.marketplace.service.AdminIPConfigurationLocalServiceUtil;
+import gr.open.marketplace.service.AdminIPValidationDataLocalServiceUtil;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+public class HookedLayoutAction extends BaseStrutsAction implements Constants{
+
+	private static Log logger = LogFactoryUtil.getLog(HookedLayoutAction.class);
+	private static final String LOGOUT = "LOGOUT";
+
+	@Override
+	public String execute(StrutsAction originalStrutsAction, HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		AdminIPConfiguration conf = AdminIPConfigurationLocalServiceUtil.getAdminIPConfiguration();
+		if (conf.getMode() == MODE_LOGIN) {
+			return originalStrutsAction.execute(request, response);
+		}
+		
+		String remoteAddr = request.getRemoteAddr();
+		String remoteHost = request.getRemoteHost();
+		long userId = PortalUtil.getUserId(request);
+		long companyId = PortalUtil.getCompanyId(request);
+		
+		if (userId == 0) {
+			return originalStrutsAction.execute(request, response);
+		}
+		
+		AdminIPConfiguration config = null;
+		try {
+			User user = UserLocalServiceUtil.getUser(userId);
+			config = AdminIPConfigurationLocalServiceUtil.getAdminIPConfiguration();
+			if (config.isDebug()) {
+				logger.info("CHECKING");
+				logger.info("  USER: " + user);
+				logger.info("  USER ROLES: ");
+				for (Role role : user.getRoles()) {
+					logger.info("    - " + role.getName());
+				}
+				logger.info("  REMOTE ADDRESS: " + remoteAddr);
+				logger.info("  REMOTE HOST: " + remoteHost);
+			}
+
+			try {
+				for (Role role : AdminIPValidationDataLocalServiceUtil.getAvailableRoles(companyId)) {
+					if (HookHelper.hasUserRole(user, role.getName())) {
+						List<AdminIPValidationData> allowedIps = AdminIPValidationDataLocalServiceUtil.getByCopmanyAndRole(companyId, role.getRoleId());
+						for (AdminIPValidationData data : allowedIps) {
+							
+							for (String ip : data.getIpAddresses().split(",")) {
+								if (config.isDebug()) logger.info("  CHECKING IP:" + ip);
+								if (HookHelper.isValidAdminSession(ip, remoteAddr, remoteHost)) {
+									for (String dataRoleIdAsString : data.getRoles().split(",")) {
+										long dataLongId = Long.parseLong(dataRoleIdAsString);
+										if (role.getRoleId() == dataLongId) {
+											if (config.isDebug()) logger.info("THIS USER HAS PASSED THE VALIDATION");
+											return originalStrutsAction.execute(request, response);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			catch (PortalException e2) {
+				logger.error(e2.getMessage(), e2);
+			}
+			
+			if (config.isDebug()) logger.info("THIS USER SHOULD BE REDIRECTED TO " + config.getRedirectUrl());
+			
+			if (!config.isDebug()) {
+				HttpSession session = request.getSession();
+				request.setAttribute(LOGOUT, true);
+				session.invalidate();
+				try {
+					response.sendRedirect(config.getRedirectUrl());
+				} catch (IOException e) {
+					logger.error(e.toString(), e);
+				}
+			}
+		}
+		catch (SystemException e1) {
+			logger.error(e1.toString(), e1);
+		}
+		catch (PortalException e) {
+			logger.error(e.toString(), e);
+		}
+		
+		return originalStrutsAction.execute(request, response);
+	}
+}
