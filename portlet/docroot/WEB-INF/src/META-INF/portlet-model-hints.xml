@@ -27,5 +27,6 @@
 			<hint name="max-length">5000</hint>
 		</field>
 		<field name="active" type="boolean" />
+		<field name="debugMode" type="boolean" />
 	</model>
 </model-hints>

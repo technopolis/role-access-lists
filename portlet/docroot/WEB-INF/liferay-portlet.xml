@@ -4,7 +4,7 @@
 <liferay-portlet-app>
 	
 	<portlet>
-		<portlet-name>adminallowedips</portlet-name>
+		<portlet-name>role-access-lists</portlet-name>
 		<icon>/icon.png</icon>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>5.5</control-panel-entry-weight>

@@ -35,7 +35,7 @@ public class AdminIPValidationDataCacheModel implements CacheModel<AdminIPValida
 	Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{id=");
 		sb.append(id);
@@ -57,6 +57,8 @@ public class AdminIPValidationDataCacheModel implements CacheModel<AdminIPValida
 		sb.append(notes);
 		sb.append(", active=");
 		sb.append(active);
+		sb.append(", debugMode=");
+		sb.append(debugMode);
 		sb.append("}");
 
 		return sb.toString();
@@ -113,6 +115,7 @@ public class AdminIPValidationDataCacheModel implements CacheModel<AdminIPValida
 		}
 
 		adminIPValidationDataImpl.setActive(active);
+		adminIPValidationDataImpl.setDebugMode(debugMode);
 
 		adminIPValidationDataImpl.resetOriginalValues();
 
@@ -129,4 +132,5 @@ public class AdminIPValidationDataCacheModel implements CacheModel<AdminIPValida
 	public long modifiedDate;
 	public String notes;
 	public boolean active;
+	public boolean debugMode;
 }

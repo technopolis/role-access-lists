@@ -27,5 +27,6 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="notes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="debugMode" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 </hibernate-mapping>

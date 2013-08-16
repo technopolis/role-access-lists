@@ -80,6 +80,7 @@ if (data != null) {
 	
 	<aui:fieldset helpMessage="misc-fieldset-help" label="Misc">
 		<aui:input type="checkbox" name="active" value="<%=data!=null?data.isActive():true %>"/>
+		<aui:input type="checkbox" name="debugMode" value="<%=data!=null?data.isDebugMode():true %>"/>
 		<%--
 		<aui:input type="textarea" name="notes" style="width:360px;height:150px;"  />
 		 --%>

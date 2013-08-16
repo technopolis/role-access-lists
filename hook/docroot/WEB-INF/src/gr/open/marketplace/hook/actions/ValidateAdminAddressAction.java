@@ -67,7 +67,7 @@ public class ValidateAdminAddressAction extends Action implements Constants{
 				for (Role role : AdminIPValidationDataLocalServiceUtil.getAvailableRoles(companyId)) {
 					if (HookHelper.hasUserRole(user, role.getName())) {
 						List<AdminIPValidationData> allowedIps = AdminIPValidationDataLocalServiceUtil.getByCopmanyAndRole(companyId, role.getRoleId());
-						for (AdminIPValidationData data : allowedIps) {
+						RULES : for (AdminIPValidationData data : allowedIps) {
 							
 							for (String ip : data.getIpAddresses().split(",")) {
 								if (config.isDebug()) logger.info("  CHECKING IP:" + ip);
@@ -75,8 +75,19 @@ public class ValidateAdminAddressAction extends Action implements Constants{
 									for (String dataRoleIdAsString : data.getRoles().split(",")) {
 										long dataLongId = Long.parseLong(dataRoleIdAsString);
 										if (role.getRoleId() == dataLongId) {
-											if (config.isDebug()) logger.info("THIS USER HAS PASSED THE VALIDATION");
-											return;
+											if (config.isDebug()) {
+												logger.info("THIS USER HAS PASSED THE VALIDATION");
+												if (data.isDebugMode()) {
+													logger.info("THIS RULE IS IN DEBUG MODE. ");
+												}
+											}
+											else {
+												if (data.isDebugMode()) {
+													logger.info("THIS RULE IS IN DEBUG MODE. THE USER WOULD HAVE PASSED THE CHECKS...");
+													continue RULES;
+												}
+											}
+											return ;
 										}
 									}
 								}

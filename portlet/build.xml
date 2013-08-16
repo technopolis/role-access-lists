@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="role-access-lists-portlet" basedir="." default="deploy">
+<project name="RoleAccessLists-portlet" basedir="." default="deploy">
 	<import file="../build-common-portlet.xml" />
 	
 	<target name="deploy-jenkins">

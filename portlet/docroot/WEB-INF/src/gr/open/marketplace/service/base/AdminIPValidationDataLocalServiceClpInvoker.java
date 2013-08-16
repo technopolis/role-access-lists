@@ -112,29 +112,34 @@ public class AdminIPValidationDataLocalServiceClpInvoker {
 
 		_methodParameterTypes41 = new String[] { "java.lang.String" };
 
-		_methodName46 = "getAvailableRoles";
+		_methodName46 = "hasRoleDebugMode";
 
-		_methodParameterTypes46 = new String[] { "long" };
+		_methodParameterTypes46 = new String[] { "long", "long" };
 
-		_methodName47 = "getByCopmanyAndRole";
+		_methodName47 = "getAvailableRoles";
 
-		_methodParameterTypes47 = new String[] { "long", "long" };
+		_methodParameterTypes47 = new String[] { "long" };
 
-		_methodName48 = "getAdminIPValidationData";
+		_methodName48 = "getByCopmanyAndRole";
 
-		_methodParameterTypes48 = new String[] {
-				"long", "java.lang.String", "int", "long", "int", "int"
-			};
+		_methodParameterTypes48 = new String[] { "long", "long" };
 
-		_methodName49 = "getAdminIPValidationDataCount";
+		_methodName49 = "getAdminIPValidationData";
 
 		_methodParameterTypes49 = new String[] {
-				"long", "java.lang.String", "int", "long"
+				"long", "java.lang.String", "int", "int", "long", "int", "int",
+				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 
-		_methodName50 = "getAllowedAddressesList";
+		_methodName50 = "getAdminIPValidationDataCount";
 
-		_methodParameterTypes50 = new String[] {  };
+		_methodParameterTypes50 = new String[] {
+				"long", "java.lang.String", "int", "int", "long"
+			};
+
+		_methodName51 = "getAllowedAddressesList";
+
+		_methodParameterTypes51 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -238,35 +243,44 @@ public class AdminIPValidationDataLocalServiceClpInvoker {
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return AdminIPValidationDataLocalServiceUtil.getAvailableRoles(((Long)arguments[0]).longValue());
+			return AdminIPValidationDataLocalServiceUtil.hasRoleDebugMode(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return AdminIPValidationDataLocalServiceUtil.getByCopmanyAndRole(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return AdminIPValidationDataLocalServiceUtil.getAvailableRoles(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return AdminIPValidationDataLocalServiceUtil.getAdminIPValidationData(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1],
-				((Integer)arguments[2]).intValue(),
-				((Long)arguments[3]).longValue(),
-				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue());
+			return AdminIPValidationDataLocalServiceUtil.getByCopmanyAndRole(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName49.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			return AdminIPValidationDataLocalServiceUtil.getAdminIPValidationDataCount(((Long)arguments[0]).longValue(),
+			return AdminIPValidationDataLocalServiceUtil.getAdminIPValidationData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
-				((Long)arguments[3]).longValue());
+				((Integer)arguments[3]).intValue(),
+				((Long)arguments[4]).longValue(),
+				((Integer)arguments[5]).intValue(),
+				((Integer)arguments[6]).intValue(),
+				(com.liferay.portal.kernel.util.OrderByComparator)arguments[7]);
 		}
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return AdminIPValidationDataLocalServiceUtil.getAdminIPValidationDataCount(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue(),
+				((Long)arguments[4]).longValue());
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return AdminIPValidationDataLocalServiceUtil.getAllowedAddressesList();
 		}
 
@@ -319,4 +333,6 @@ public class AdminIPValidationDataLocalServiceClpInvoker {
 	private String[] _methodParameterTypes49;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

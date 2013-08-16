@@ -272,6 +272,20 @@ public class AdminIPValidationDataLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	/**
+	* Only if all rules for this role are in debug mode the method will return true
+	*
+	* @param companyId
+	* @param roleId
+	* @return
+	* @throws SystemException
+	*/
+	public boolean hasRoleDebugMode(long companyId, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _adminIPValidationDataLocalService.hasRoleDebugMode(companyId,
+			roleId);
+	}
+
 	public java.util.List<com.liferay.portal.model.Role> getAvailableRoles(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -287,16 +301,17 @@ public class AdminIPValidationDataLocalServiceWrapper
 	}
 
 	public java.util.List<gr.open.marketplace.model.AdminIPValidationData> getAdminIPValidationData(
-		long companyId, java.lang.String ip, int active, long roleId,
-		int start, int end) {
+		long companyId, java.lang.String ip, int active, int debugMode,
+		long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator comparator) {
 		return _adminIPValidationDataLocalService.getAdminIPValidationData(companyId,
-			ip, active, roleId, start, end);
+			ip, active, debugMode, roleId, start, end, comparator);
 	}
 
 	public int getAdminIPValidationDataCount(long companyId,
-		java.lang.String ip, int active, long roleId) {
+		java.lang.String ip, int active, int debugMode, long roleId) {
 		return _adminIPValidationDataLocalService.getAdminIPValidationDataCount(companyId,
-			ip, active, roleId);
+			ip, active, debugMode, roleId);
 	}
 
 	public java.util.List<java.lang.String> getAllowedAddressesList() {

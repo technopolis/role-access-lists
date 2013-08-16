@@ -16,6 +16,7 @@
 		<column name="modifiedDate" type="Date" />
 		<column name="notes" type="String" />
 		<column name="active" type="boolean" />
+		<column name="debugMode" type="boolean" />
 
 		<order><order-column name="modifiedDate" order-by="desc"></order-column></order>
 		
@@ -26,6 +27,17 @@
 		<finder return-type="Collection" name="ActiveAndCompany">
 			<finder-column name="companyId"></finder-column>
 			<finder-column name="active"></finder-column>
+		</finder>
+		
+		<finder return-type="Collection" name="ActiveAndCompanyAndDebug">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="active"></finder-column>
+			<finder-column name="debugMode"></finder-column>
+		</finder>
+		
+		<finder return-type="Collection" name="CompanyAndDebug">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="debugMode"></finder-column>
 		</finder>
 
 		<finder return-type="Collection" name="Company">

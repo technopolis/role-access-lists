@@ -15,5 +15,6 @@ create table opengr_AdminIPValidationData (
 	createDate DATE null,
 	modifiedDate DATE null,
 	notes TEXT null,
-	active_ BOOLEAN
+	active_ BOOLEAN,
+	debugMode BOOLEAN
 );

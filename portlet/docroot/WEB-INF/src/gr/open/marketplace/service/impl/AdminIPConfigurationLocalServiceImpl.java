@@ -51,6 +51,5 @@ public class AdminIPConfigurationLocalServiceImpl
 		else {
 			return all.get(0);
 		}
-		
 	}
 }

@@ -71,9 +71,10 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "notes", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN }
+			{ "active_", Types.BOOLEAN },
+			{ "debugMode", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table opengr_AdminIPValidationData (id_ LONG not null primary key,ipAddresses STRING null,roles STRING null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,notes TEXT null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table opengr_AdminIPValidationData (id_ LONG not null primary key,ipAddresses STRING null,roles STRING null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,notes TEXT null,active_ BOOLEAN,debugMode BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table opengr_AdminIPValidationData";
 	public static final String ORDER_BY_JPQL = " ORDER BY adminIPValidationData.modifiedDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY opengr_AdminIPValidationData.modifiedDate DESC";
@@ -91,7 +92,8 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 			true);
 	public static long ACTIVE_COLUMN_BITMASK = 1L;
 	public static long COMPANYID_COLUMN_BITMASK = 2L;
-	public static long ID_COLUMN_BITMASK = 4L;
+	public static long DEBUGMODE_COLUMN_BITMASK = 4L;
+	public static long ID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.gr.open.marketplace.model.AdminIPValidationData"));
 
@@ -136,6 +138,7 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("notes", getNotes());
 		attributes.put("active", getActive());
+		attributes.put("debugMode", getDebugMode());
 
 		return attributes;
 	}
@@ -200,6 +203,12 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		Boolean debugMode = (Boolean)attributes.get("debugMode");
+
+		if (debugMode != null) {
+			setDebugMode(debugMode);
 		}
 	}
 
@@ -353,6 +362,30 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 		return _originalActive;
 	}
 
+	public boolean getDebugMode() {
+		return _debugMode;
+	}
+
+	public boolean isDebugMode() {
+		return _debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		_columnBitmask |= DEBUGMODE_COLUMN_BITMASK;
+
+		if (!_setOriginalDebugMode) {
+			_setOriginalDebugMode = true;
+
+			_originalDebugMode = _debugMode;
+		}
+
+		_debugMode = debugMode;
+	}
+
+	public boolean getOriginalDebugMode() {
+		return _originalDebugMode;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -395,6 +428,7 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 		adminIPValidationDataImpl.setModifiedDate(getModifiedDate());
 		adminIPValidationDataImpl.setNotes(getNotes());
 		adminIPValidationDataImpl.setActive(getActive());
+		adminIPValidationDataImpl.setDebugMode(getDebugMode());
 
 		adminIPValidationDataImpl.resetOriginalValues();
 
@@ -462,6 +496,10 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 
 		adminIPValidationDataModelImpl._setOriginalActive = false;
 
+		adminIPValidationDataModelImpl._originalDebugMode = adminIPValidationDataModelImpl._debugMode;
+
+		adminIPValidationDataModelImpl._setOriginalDebugMode = false;
+
 		adminIPValidationDataModelImpl._columnBitmask = 0;
 	}
 
@@ -527,12 +565,14 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 
 		adminIPValidationDataCacheModel.active = getActive();
 
+		adminIPValidationDataCacheModel.debugMode = getDebugMode();
+
 		return adminIPValidationDataCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{id=");
 		sb.append(getId());
@@ -554,13 +594,15 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 		sb.append(getNotes());
 		sb.append(", active=");
 		sb.append(getActive());
+		sb.append(", debugMode=");
+		sb.append(getDebugMode());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("gr.open.marketplace.model.AdminIPValidationData");
@@ -606,6 +648,10 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>debugMode</column-name><column-value><![CDATA[");
+		sb.append(getDebugMode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -633,6 +679,9 @@ public class AdminIPValidationDataModelImpl extends BaseModelImpl<AdminIPValidat
 	private boolean _active;
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
+	private boolean _debugMode;
+	private boolean _originalDebugMode;
+	private boolean _setOriginalDebugMode;
 	private long _columnBitmask;
 	private AdminIPValidationData _escapedModelProxy;
 }

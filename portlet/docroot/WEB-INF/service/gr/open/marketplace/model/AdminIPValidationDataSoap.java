@@ -41,6 +41,7 @@ public class AdminIPValidationDataSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setNotes(model.getNotes());
 		soapModel.setActive(model.getActive());
+		soapModel.setDebugMode(model.getDebugMode());
 
 		return soapModel;
 	}
@@ -180,6 +181,18 @@ public class AdminIPValidationDataSoap implements Serializable {
 		_active = active;
 	}
 
+	public boolean getDebugMode() {
+		return _debugMode;
+	}
+
+	public boolean isDebugMode() {
+		return _debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		_debugMode = debugMode;
+	}
+
 	private long _id;
 	private String _ipAddresses;
 	private String _roles;
@@ -190,4 +203,5 @@ public class AdminIPValidationDataSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _notes;
 	private boolean _active;
+	private boolean _debugMode;
 }

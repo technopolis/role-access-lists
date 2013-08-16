@@ -4,6 +4,6 @@
 <display>
 	
 	<category name="category.admin">
-		<portlet id="adminallowedips"></portlet>
+		<portlet id="role-access-lists"></portlet>
 	</category>
 </display>

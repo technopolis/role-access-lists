@@ -228,6 +228,27 @@ public interface AdminIPValidationDataModel extends AuditedModel,
 	 */
 	public void setActive(boolean active);
 
+	/**
+	 * Returns the debug mode of this admin i p validation data.
+	 *
+	 * @return the debug mode of this admin i p validation data
+	 */
+	public boolean getDebugMode();
+
+	/**
+	 * Returns <code>true</code> if this admin i p validation data is debug mode.
+	 *
+	 * @return <code>true</code> if this admin i p validation data is debug mode; <code>false</code> otherwise
+	 */
+	public boolean isDebugMode();
+
+	/**
+	 * Sets whether this admin i p validation data is debug mode.
+	 *
+	 * @param debugMode the debug mode of this admin i p validation data
+	 */
+	public void setDebugMode(boolean debugMode);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

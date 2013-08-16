@@ -57,6 +57,7 @@ public class AdminIPValidationDataWrapper implements AdminIPValidationData,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("notes", getNotes());
 		attributes.put("active", getActive());
+		attributes.put("debugMode", getDebugMode());
 
 		return attributes;
 	}
@@ -120,6 +121,12 @@ public class AdminIPValidationDataWrapper implements AdminIPValidationData,
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		Boolean debugMode = (Boolean)attributes.get("debugMode");
+
+		if (debugMode != null) {
+			setDebugMode(debugMode);
 		}
 	}
 
@@ -348,6 +355,33 @@ public class AdminIPValidationDataWrapper implements AdminIPValidationData,
 	*/
 	public void setActive(boolean active) {
 		_adminIPValidationData.setActive(active);
+	}
+
+	/**
+	* Returns the debug mode of this admin i p validation data.
+	*
+	* @return the debug mode of this admin i p validation data
+	*/
+	public boolean getDebugMode() {
+		return _adminIPValidationData.getDebugMode();
+	}
+
+	/**
+	* Returns <code>true</code> if this admin i p validation data is debug mode.
+	*
+	* @return <code>true</code> if this admin i p validation data is debug mode; <code>false</code> otherwise
+	*/
+	public boolean isDebugMode() {
+		return _adminIPValidationData.isDebugMode();
+	}
+
+	/**
+	* Sets whether this admin i p validation data is debug mode.
+	*
+	* @param debugMode the debug mode of this admin i p validation data
+	*/
+	public void setDebugMode(boolean debugMode) {
+		_adminIPValidationData.setDebugMode(debugMode);
 	}
 
 	public boolean isNew() {

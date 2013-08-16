@@ -78,6 +78,7 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("notes", getNotes());
 		attributes.put("active", getActive());
+		attributes.put("debugMode", getDebugMode());
 
 		return attributes;
 	}
@@ -142,6 +143,12 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		Boolean debugMode = (Boolean)attributes.get("debugMode");
+
+		if (debugMode != null) {
+			setDebugMode(debugMode);
 		}
 	}
 
@@ -237,6 +244,18 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 		_active = active;
 	}
 
+	public boolean getDebugMode() {
+		return _debugMode;
+	}
+
+	public boolean isDebugMode() {
+		return _debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		_debugMode = debugMode;
+	}
+
 	public java.lang.String getIpsForTable() {
 		throw new UnsupportedOperationException();
 	}
@@ -304,6 +323,7 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 		clone.setModifiedDate(getModifiedDate());
 		clone.setNotes(getNotes());
 		clone.setActive(getActive());
+		clone.setDebugMode(getDebugMode());
 
 		return clone;
 	}
@@ -355,7 +375,7 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{id=");
 		sb.append(getId());
@@ -377,13 +397,15 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 		sb.append(getNotes());
 		sb.append(", active=");
 		sb.append(getActive());
+		sb.append(", debugMode=");
+		sb.append(getDebugMode());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("gr.open.marketplace.model.AdminIPValidationData");
@@ -429,6 +451,10 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>debugMode</column-name><column-value><![CDATA[");
+		sb.append(getDebugMode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -446,5 +472,6 @@ public class AdminIPValidationDataClp extends BaseModelImpl<AdminIPValidationDat
 	private Date _modifiedDate;
 	private String _notes;
 	private boolean _active;
+	private boolean _debugMode;
 	private BaseModel<?> _adminIPValidationDataRemoteModel;
 }

@@ -39,7 +39,7 @@ import org.apache.commons.lang.StringUtils;
 public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 	
 	private static Log logger = LogFactoryUtil.getLog(AdminAllowedIPsPortlet.class);
-	private String defaultRedirectUrl = PortletProps.get("redirectUrl.default");
+	private String defaultRedirectUrl =  PortletProps.get("redirectUrl.default");
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
@@ -102,7 +102,7 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 	
 	@ProcessAction(name = "saveEntry")
 	public void saveEntry(ActionRequest request, ActionResponse response) throws PortletException, IOException{
-		logger.info("SAVING DATA!");
+		if (logger.isDebugEnabled()) logger.debug("SAVING DATA!");
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
 		long id = ParamUtil.getLong(request, "id", 0);
@@ -110,6 +110,7 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 		String[] roles = ParamUtil.getParameterValues(request, "roles");
 		String notes = ParamUtil.getString(request, "notes", "");
 		boolean active = ParamUtil.getBoolean(request, "active", true);
+		boolean debugMode = ParamUtil.getBoolean(request, "debugMode", true);
 		
 		AdminIPValidationData tableEntry = null;
 
@@ -126,22 +127,23 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 			tableEntry.setRoles(StringUtils.join(roles, ","));
 			tableEntry.setNotes(notes);
 			tableEntry.setActive(active);
+			tableEntry.setDebugMode(debugMode);
 			tableEntry.setCompanyId(themeDisplay.getCompanyId());
 			tableEntry.setUserName(themeDisplay.getUser().getEmailAddress());
 			tableEntry.setUserId(themeDisplay.getUserId());
 			tableEntry.setModifiedDate(new Date());
 			AdminIPValidationData newData = null;
 			if (updating) {
-				logger.info("UPDATING " + tableEntry);
+				if (logger.isDebugEnabled()) logger.debug("UPDATING " + tableEntry);
 				newData = AdminIPValidationDataLocalServiceUtil.updateAdminIPValidationData(tableEntry);
 			}
 			else {
-				logger.info("CREATING " + tableEntry);
+				if (logger.isDebugEnabled()) logger.debug("CREATING " + tableEntry);
 				tableEntry.setCreateDate(new Date());
 				newData = AdminIPValidationDataLocalServiceUtil.addAdminIPValidationData(tableEntry);
 			}
 			
-			logger.info("NEW DATA IS:" + newData);
+			if (logger.isDebugEnabled()) logger.debug("NEW DATA IS:" + newData);
 		} catch (SystemException e) {
 			logger.error(e.getMessage(), e);
 			SessionErrors.add(request, "error-in-saving-data");
@@ -155,7 +157,7 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 	
 	@ProcessAction(name = "saveIpsConfiguration")
 	public void saveIpsConfiguration(ActionRequest request, ActionResponse response) throws PortletException, IOException{
-		logger.info("SAVING CONFIGURATION DATA!");
+		if (logger.isDebugEnabled()) logger.debug("SAVING CONFIGURATION DATA!");
 		
 		long id = ParamUtil.getLong(request, "id", 0);
 		String redirectUrl = ParamUtil.getString(request, "redirectUrl", defaultRedirectUrl);
@@ -164,7 +166,7 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 		
 		if (!validateRedirectUrl(request, redirectUrl)) {
 			SessionErrors.add(request, "error-in-redirect-url");
-			logger.info("redirect URL is invalid");
+			if (logger.isDebugEnabled()) logger.debug("redirect URL is invalid");
 			response.setRenderParameter("jspPage", "/adminallowedips/ipsConfiguration.jsp");
 			response.setRenderParameter("id", String.valueOf(id));
 		}
@@ -186,15 +188,15 @@ public class AdminAllowedIPsPortlet extends MVCPortlet implements Constants {
 				
 				AdminIPConfiguration newConfig = null;
 				if (updating) {
-					logger.info("UPDATING " + config);
+					if (logger.isDebugEnabled()) logger.debug("UPDATING " + config);
 					newConfig = AdminIPConfigurationLocalServiceUtil.updateAdminIPConfiguration(config, true);
 				}
 				else {
-					logger.info("CREATING " + config);
+					if (logger.isDebugEnabled()) logger.debug("CREATING " + config);
 					newConfig = AdminIPConfigurationLocalServiceUtil.addAdminIPConfiguration(config);
 				}
 				
-				logger.info("NEW DATA IS:" + newConfig);
+				if (logger.isDebugEnabled()) logger.debug("NEW DATA IS:" + newConfig);
 			} catch (SystemException e) {
 				logger.error(e.getMessage(), e);
 				SessionErrors.add(request, "error-in-saving-data");

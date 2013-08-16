@@ -114,29 +114,34 @@ public class AdminIPValidationDataLocalServiceClp
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getAvailableRoles";
+		_methodName19 = "hasRoleDebugMode";
 
-		_methodParameterTypes19 = new String[] { "long" };
+		_methodParameterTypes19 = new String[] { "long", "long" };
 
-		_methodName20 = "getByCopmanyAndRole";
+		_methodName20 = "getAvailableRoles";
 
-		_methodParameterTypes20 = new String[] { "long", "long" };
+		_methodParameterTypes20 = new String[] { "long" };
 
-		_methodName21 = "getAdminIPValidationData";
+		_methodName21 = "getByCopmanyAndRole";
 
-		_methodParameterTypes21 = new String[] {
-				"long", "java.lang.String", "int", "long", "int", "int"
-			};
+		_methodParameterTypes21 = new String[] { "long", "long" };
 
-		_methodName22 = "getAdminIPValidationDataCount";
+		_methodName22 = "getAdminIPValidationData";
 
 		_methodParameterTypes22 = new String[] {
-				"long", "java.lang.String", "int", "long"
+				"long", "java.lang.String", "int", "int", "long", "int", "int",
+				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 
-		_methodName23 = "getAllowedAddressesList";
+		_methodName23 = "getAdminIPValidationDataCount";
 
-		_methodParameterTypes23 = new String[] {  };
+		_methodParameterTypes23 = new String[] {
+				"long", "java.lang.String", "int", "int", "long"
+			};
+
+		_methodName24 = "getAllowedAddressesList";
+
+		_methodParameterTypes24 = new String[] {  };
 	}
 
 	public gr.open.marketplace.model.AdminIPValidationData addAdminIPValidationData(
@@ -675,6 +680,33 @@ public class AdminIPValidationDataLocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean hasRoleDebugMode(long companyId, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { companyId, roleId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	public java.util.List<com.liferay.portal.model.Role> getAvailableRoles(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -682,8 +714,8 @@ public class AdminIPValidationDataLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] { companyId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { companyId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -714,8 +746,8 @@ public class AdminIPValidationDataLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20, new Object[] { companyId, roleId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { companyId, roleId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -737,13 +769,14 @@ public class AdminIPValidationDataLocalServiceClp
 	}
 
 	public java.util.List<gr.open.marketplace.model.AdminIPValidationData> getAdminIPValidationData(
-		long companyId, java.lang.String ip, int active, long roleId,
-		int start, int end) {
+		long companyId, java.lang.String ip, int active, int debugMode,
+		long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator comparator) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] {
 						companyId,
 						
@@ -751,11 +784,15 @@ public class AdminIPValidationDataLocalServiceClp
 						
 					active,
 						
+					debugMode,
+						
 					roleId,
 						
 					start,
 						
-					end
+					end,
+						
+					ClpSerializer.translateInput(comparator)
 					});
 		}
 		catch (Throwable t) {
@@ -774,18 +811,20 @@ public class AdminIPValidationDataLocalServiceClp
 	}
 
 	public int getAdminIPValidationDataCount(long companyId,
-		java.lang.String ip, int active, long roleId) {
+		java.lang.String ip, int active, int debugMode, long roleId) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] {
 						companyId,
 						
 					ClpSerializer.translateInput(ip),
 						
 					active,
+						
+					debugMode,
 						
 					roleId
 					});
@@ -809,8 +848,8 @@ public class AdminIPValidationDataLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -874,4 +913,6 @@ public class AdminIPValidationDataLocalServiceClp
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

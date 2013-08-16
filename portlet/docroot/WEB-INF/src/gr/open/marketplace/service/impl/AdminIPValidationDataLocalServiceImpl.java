@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -29,6 +30,7 @@ import gr.open.marketplace.service.base.AdminIPValidationDataLocalServiceBaseImp
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -54,6 +56,23 @@ public class AdminIPValidationDataLocalServiceImpl
 	 */
 	
 	private static final Log logger = LogFactoryUtil.getLog(AdminIPValidationDataLocalServiceImpl.class);
+	
+	/**
+	 * Only if all rules for this role are in debug mode the method will return true
+	 * @param companyId
+	 * @param roleId
+	 * @return
+	 * @throws SystemException
+	 */
+	public boolean hasRoleDebugMode(long companyId, long roleId) throws SystemException {
+		List<AdminIPValidationData> datas = getByCopmanyAndRole(companyId, roleId);
+		for (AdminIPValidationData data : datas) {
+			if (!data.isDebugMode()) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public List<Role> getAvailableRoles(long companyId) throws SystemException, PortalException {
 		List<Role> results = new ArrayList<Role>();
@@ -88,17 +107,39 @@ public class AdminIPValidationDataLocalServiceImpl
 		return results;
 	}
 	
-	public List<AdminIPValidationData> getAdminIPValidationData(long companyId, String ip, int active, long roleId, int start, int end) {
+	public List<AdminIPValidationData> getAdminIPValidationData(long companyId, String ip, int active, int debugMode, long roleId, int start, int end, OrderByComparator comparator) {
 						
-		List<AdminIPValidationData> results = new ArrayList<AdminIPValidationData>();
+		List<AdminIPValidationData> results = new LinkedList<AdminIPValidationData>();
 		try {
 			List<AdminIPValidationData> tempResults = null;
 
-			if (active == ACTIVE_ALL) {
-				tempResults = adminIPValidationDataPersistence.findByCompany(companyId, start, end);
+			if (active == ACTIVE_ALL && debugMode == DEBUG_MODE_ALL) {
+				tempResults = adminIPValidationDataPersistence.findByCompany(companyId, start, end, comparator);
+			}
+			else if (active == ACTIVE_ALL) {
+				tempResults = adminIPValidationDataPersistence.findByCompanyAndDebug(
+					companyId, 
+					debugMode==DEBUG_MODE_ONLY_ACTIVE?true:false, 
+					start, 
+					end, 
+					comparator);
+			}
+			else if (debugMode == DEBUG_MODE_ALL) {
+				tempResults = adminIPValidationDataPersistence.findByActiveAndCompany(
+					companyId, 
+					active==ACTIVE_ONLY_ACTIVE?true:false, 
+					start, 
+					end, 
+					comparator);
 			}
 			else {
-				tempResults = adminIPValidationDataPersistence.findByActiveAndCompany(companyId, active==ACTIVE_ONLY_ACTIVE?true:false, start, end);
+				tempResults = adminIPValidationDataPersistence.findByActiveAndCompanyAndDebug(
+					companyId, 
+					active==ACTIVE_ONLY_ACTIVE?true:false, 
+					debugMode==DEBUG_MODE_ONLY_ACTIVE?true:false, 
+					start, 
+					end, 
+					comparator);
 			}
 			
 			if (Validator.isNotNull(ip) || roleId > 0) {
@@ -132,8 +173,8 @@ public class AdminIPValidationDataLocalServiceImpl
 		return results;
 	}
 	
-	public int getAdminIPValidationDataCount(long companyId, String ip, int active, long roleId) {
-		return getAdminIPValidationData(companyId, ip, active, roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS).size();
+	public int getAdminIPValidationDataCount(long companyId, String ip, int active, int debugMode,  long roleId) {
+		return getAdminIPValidationData(companyId, ip, active, debugMode, roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null).size();
 	}
 	
 	public List<String> getAllowedAddressesList() {

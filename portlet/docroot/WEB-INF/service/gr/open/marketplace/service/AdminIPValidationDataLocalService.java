@@ -247,6 +247,18 @@ public interface AdminIPValidationDataLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	/**
+	* Only if all rules for this role are in debug mode the method will return true
+	*
+	* @param companyId
+	* @param roleId
+	* @return
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasRoleDebugMode(long companyId, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getAvailableRoles(
 		long companyId)
@@ -260,12 +272,13 @@ public interface AdminIPValidationDataLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<gr.open.marketplace.model.AdminIPValidationData> getAdminIPValidationData(
-		long companyId, java.lang.String ip, int active, long roleId,
-		int start, int end);
+		long companyId, java.lang.String ip, int active, int debugMode,
+		long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator comparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAdminIPValidationDataCount(long companyId,
-		java.lang.String ip, int active, long roleId);
+		java.lang.String ip, int active, int debugMode, long roleId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.String> getAllowedAddressesList();

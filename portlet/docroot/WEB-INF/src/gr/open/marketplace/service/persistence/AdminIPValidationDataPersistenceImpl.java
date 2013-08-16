@@ -111,6 +111,65 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByActiveAndCompany",
 			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG =
+		new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED,
+			AdminIPValidationDataImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByActiveAndCompanyAndDebug",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG =
+		new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED,
+			AdminIPValidationDataImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByActiveAndCompanyAndDebug",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Boolean.class.getName()
+			},
+			AdminIPValidationDataModelImpl.COMPANYID_COLUMN_BITMASK |
+			AdminIPValidationDataModelImpl.ACTIVE_COLUMN_BITMASK |
+			AdminIPValidationDataModelImpl.DEBUGMODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANYANDDEBUG =
+		new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByActiveAndCompanyAndDebug",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYANDDEBUG =
+		new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED,
+			AdminIPValidationDataImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyAndDebug",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYANDDEBUG =
+		new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED,
+			AdminIPValidationDataImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyAndDebug",
+			new String[] { Long.class.getName(), Boolean.class.getName() },
+			AdminIPValidationDataModelImpl.COMPANYID_COLUMN_BITMASK |
+			AdminIPValidationDataModelImpl.DEBUGMODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYANDDEBUG = new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
+			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCompanyAndDebug",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANY = new FinderPath(AdminIPValidationDataModelImpl.ENTITY_CACHE_ENABLED,
 			AdminIPValidationDataModelImpl.FINDER_CACHE_ENABLED,
 			AdminIPValidationDataImpl.class,
@@ -389,6 +448,54 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 			}
 
 			if ((adminIPValidationDataModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(adminIPValidationDataModelImpl.getOriginalCompanyId()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getOriginalActive()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getOriginalDebugMode())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANYANDDEBUG,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG,
+					args);
+
+				args = new Object[] {
+						Long.valueOf(adminIPValidationDataModelImpl.getCompanyId()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getActive()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getDebugMode())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANYANDDEBUG,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG,
+					args);
+			}
+
+			if ((adminIPValidationDataModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYANDDEBUG.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(adminIPValidationDataModelImpl.getOriginalCompanyId()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getOriginalDebugMode())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYANDDEBUG,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYANDDEBUG,
+					args);
+
+				args = new Object[] {
+						Long.valueOf(adminIPValidationDataModelImpl.getCompanyId()),
+						Boolean.valueOf(adminIPValidationDataModelImpl.getDebugMode())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYANDDEBUG,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYANDDEBUG,
+					args);
+			}
+
+			if ((adminIPValidationDataModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANY.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						Long.valueOf(adminIPValidationDataModelImpl.getOriginalCompanyId())
@@ -458,6 +565,7 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 		adminIPValidationDataImpl.setModifiedDate(adminIPValidationData.getModifiedDate());
 		adminIPValidationDataImpl.setNotes(adminIPValidationData.getNotes());
 		adminIPValidationDataImpl.setActive(adminIPValidationData.isActive());
+		adminIPValidationDataImpl.setDebugMode(adminIPValidationData.isDebugMode());
 
 		return adminIPValidationDataImpl;
 	}
@@ -1116,6 +1224,867 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 	}
 
 	/**
+	 * Returns all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @return the matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode)
+		throws SystemException {
+		return findByActiveAndCompanyAndDebug(companyId, active, debugMode,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param start the lower bound of the range of admin i p validation datas
+	 * @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	 * @return the range of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode, int start, int end)
+		throws SystemException {
+		return findByActiveAndCompanyAndDebug(companyId, active, debugMode,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param start the lower bound of the range of admin i p validation datas
+	 * @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG;
+			finderArgs = new Object[] { companyId, active, debugMode };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVEANDCOMPANYANDDEBUG;
+			finderArgs = new Object[] {
+					companyId, active, debugMode,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<AdminIPValidationData> list = (List<AdminIPValidationData>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (AdminIPValidationData adminIPValidationData : list) {
+				if ((companyId != adminIPValidationData.getCompanyId()) ||
+						(active != adminIPValidationData.getActive()) ||
+						(debugMode != adminIPValidationData.getDebugMode())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_ADMINIPVALIDATIONDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_ACTIVE_2);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_DEBUGMODE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AdminIPValidationDataModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				qPos.add(debugMode);
+
+				list = (List<AdminIPValidationData>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData findByActiveAndCompanyAndDebug_First(
+		long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = fetchByActiveAndCompanyAndDebug_First(companyId,
+				active, debugMode, orderByComparator);
+
+		if (adminIPValidationData != null) {
+			return adminIPValidationData;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append(", debugMode=");
+		msg.append(debugMode);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAdminIPValidationDataException(msg.toString());
+	}
+
+	/**
+	 * Returns the first admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData fetchByActiveAndCompanyAndDebug_First(
+		long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<AdminIPValidationData> list = findByActiveAndCompanyAndDebug(companyId,
+				active, debugMode, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData findByActiveAndCompanyAndDebug_Last(
+		long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = fetchByActiveAndCompanyAndDebug_Last(companyId,
+				active, debugMode, orderByComparator);
+
+		if (adminIPValidationData != null) {
+			return adminIPValidationData;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append(", debugMode=");
+		msg.append(debugMode);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAdminIPValidationDataException(msg.toString());
+	}
+
+	/**
+	 * Returns the last admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData fetchByActiveAndCompanyAndDebug_Last(
+		long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByActiveAndCompanyAndDebug(companyId, active, debugMode);
+
+		List<AdminIPValidationData> list = findByActiveAndCompanyAndDebug(companyId,
+				active, debugMode, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the admin i p validation datas before and after the current admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param id the primary key of the current admin i p validation data
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a admin i p validation data with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData[] findByActiveAndCompanyAndDebug_PrevAndNext(
+		long id, long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			AdminIPValidationData[] array = new AdminIPValidationDataImpl[3];
+
+			array[0] = getByActiveAndCompanyAndDebug_PrevAndNext(session,
+					adminIPValidationData, companyId, active, debugMode,
+					orderByComparator, true);
+
+			array[1] = adminIPValidationData;
+
+			array[2] = getByActiveAndCompanyAndDebug_PrevAndNext(session,
+					adminIPValidationData, companyId, active, debugMode,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected AdminIPValidationData getByActiveAndCompanyAndDebug_PrevAndNext(
+		Session session, AdminIPValidationData adminIPValidationData,
+		long companyId, boolean active, boolean debugMode,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ADMINIPVALIDATIONDATA_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_DEBUGMODE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(AdminIPValidationDataModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(active);
+
+		qPos.add(debugMode);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(adminIPValidationData);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AdminIPValidationData> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @return the matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByCompanyAndDebug(long companyId,
+		boolean debugMode) throws SystemException {
+		return findByCompanyAndDebug(companyId, debugMode, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param start the lower bound of the range of admin i p validation datas
+	 * @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	 * @return the range of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByCompanyAndDebug(long companyId,
+		boolean debugMode, int start, int end) throws SystemException {
+		return findByCompanyAndDebug(companyId, debugMode, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param start the lower bound of the range of admin i p validation datas
+	 * @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AdminIPValidationData> findByCompanyAndDebug(long companyId,
+		boolean debugMode, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYANDDEBUG;
+			finderArgs = new Object[] { companyId, debugMode };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYANDDEBUG;
+			finderArgs = new Object[] {
+					companyId, debugMode,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<AdminIPValidationData> list = (List<AdminIPValidationData>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (AdminIPValidationData adminIPValidationData : list) {
+				if ((companyId != adminIPValidationData.getCompanyId()) ||
+						(debugMode != adminIPValidationData.getDebugMode())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_ADMINIPVALIDATIONDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYANDDEBUG_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYANDDEBUG_DEBUGMODE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AdminIPValidationDataModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(debugMode);
+
+				list = (List<AdminIPValidationData>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData findByCompanyAndDebug_First(long companyId,
+		boolean debugMode, OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = fetchByCompanyAndDebug_First(companyId,
+				debugMode, orderByComparator);
+
+		if (adminIPValidationData != null) {
+			return adminIPValidationData;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", debugMode=");
+		msg.append(debugMode);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAdminIPValidationDataException(msg.toString());
+	}
+
+	/**
+	 * Returns the first admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData fetchByCompanyAndDebug_First(long companyId,
+		boolean debugMode, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<AdminIPValidationData> list = findByCompanyAndDebug(companyId,
+				debugMode, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData findByCompanyAndDebug_Last(long companyId,
+		boolean debugMode, OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = fetchByCompanyAndDebug_Last(companyId,
+				debugMode, orderByComparator);
+
+		if (adminIPValidationData != null) {
+			return adminIPValidationData;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", debugMode=");
+		msg.append(debugMode);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAdminIPValidationDataException(msg.toString());
+	}
+
+	/**
+	 * Returns the last admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData fetchByCompanyAndDebug_Last(long companyId,
+		boolean debugMode, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByCompanyAndDebug(companyId, debugMode);
+
+		List<AdminIPValidationData> list = findByCompanyAndDebug(companyId,
+				debugMode, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the admin i p validation datas before and after the current admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param id the primary key of the current admin i p validation data
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next admin i p validation data
+	 * @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a admin i p validation data with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AdminIPValidationData[] findByCompanyAndDebug_PrevAndNext(long id,
+		long companyId, boolean debugMode, OrderByComparator orderByComparator)
+		throws NoSuchAdminIPValidationDataException, SystemException {
+		AdminIPValidationData adminIPValidationData = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			AdminIPValidationData[] array = new AdminIPValidationDataImpl[3];
+
+			array[0] = getByCompanyAndDebug_PrevAndNext(session,
+					adminIPValidationData, companyId, debugMode,
+					orderByComparator, true);
+
+			array[1] = adminIPValidationData;
+
+			array[2] = getByCompanyAndDebug_PrevAndNext(session,
+					adminIPValidationData, companyId, debugMode,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected AdminIPValidationData getByCompanyAndDebug_PrevAndNext(
+		Session session, AdminIPValidationData adminIPValidationData,
+		long companyId, boolean debugMode, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ADMINIPVALIDATIONDATA_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYANDDEBUG_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYANDDEBUG_DEBUGMODE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(AdminIPValidationDataModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(debugMode);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(adminIPValidationData);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AdminIPValidationData> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Returns all the admin i p validation datas where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
@@ -1643,6 +2612,37 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 	}
 
 	/**
+	 * Removes all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByActiveAndCompanyAndDebug(long companyId,
+		boolean active, boolean debugMode) throws SystemException {
+		for (AdminIPValidationData adminIPValidationData : findByActiveAndCompanyAndDebug(
+				companyId, active, debugMode)) {
+			remove(adminIPValidationData);
+		}
+	}
+
+	/**
+	 * Removes all the admin i p validation datas where companyId = &#63; and debugMode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByCompanyAndDebug(long companyId, boolean debugMode)
+		throws SystemException {
+		for (AdminIPValidationData adminIPValidationData : findByCompanyAndDebug(
+				companyId, debugMode)) {
+			remove(adminIPValidationData);
+		}
+	}
+
+	/**
 	 * Removes all the admin i p validation datas where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -1769,6 +2769,129 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANY,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param debugMode the debug mode
+	 * @return the number of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByActiveAndCompanyAndDebug(long companyId, boolean active,
+		boolean debugMode) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, active, debugMode };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANYANDDEBUG,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_ADMINIPVALIDATIONDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_ACTIVE_2);
+
+			query.append(_FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_DEBUGMODE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				qPos.add(debugMode);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVEANDCOMPANYANDDEBUG,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param debugMode the debug mode
+	 * @return the number of matching admin i p validation datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByCompanyAndDebug(long companyId, boolean debugMode)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, debugMode };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYANDDEBUG,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ADMINIPVALIDATIONDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYANDDEBUG_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYANDDEBUG_DEBUGMODE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(debugMode);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYANDDEBUG,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1915,6 +3038,14 @@ public class AdminIPValidationDataPersistenceImpl extends BasePersistenceImpl<Ad
 	private static final String _FINDER_COLUMN_ID_ID_2 = "adminIPValidationData.id = ?";
 	private static final String _FINDER_COLUMN_ACTIVEANDCOMPANY_COMPANYID_2 = "adminIPValidationData.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_ACTIVEANDCOMPANY_ACTIVE_2 = "adminIPValidationData.active = ?";
+	private static final String _FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_COMPANYID_2 =
+		"adminIPValidationData.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_ACTIVE_2 =
+		"adminIPValidationData.active = ? AND ";
+	private static final String _FINDER_COLUMN_ACTIVEANDCOMPANYANDDEBUG_DEBUGMODE_2 =
+		"adminIPValidationData.debugMode = ?";
+	private static final String _FINDER_COLUMN_COMPANYANDDEBUG_COMPANYID_2 = "adminIPValidationData.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_COMPANYANDDEBUG_DEBUGMODE_2 = "adminIPValidationData.debugMode = ?";
 	private static final String _FINDER_COLUMN_COMPANY_COMPANYID_2 = "adminIPValidationData.companyId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "adminIPValidationData.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AdminIPValidationData exists with the primary key ";

@@ -391,6 +391,328 @@ public class AdminIPValidationDataUtil {
 	}
 
 	/**
+	* Returns all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @return the matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug(companyId, active, debugMode);
+	}
+
+	/**
+	* Returns a range of all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param start the lower bound of the range of admin i p validation datas
+	* @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	* @return the range of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug(companyId, active,
+			debugMode, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param start the lower bound of the range of admin i p validation datas
+	* @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByActiveAndCompanyAndDebug(
+		long companyId, boolean active, boolean debugMode, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug(companyId, active,
+			debugMode, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData findByActiveAndCompanyAndDebug_First(
+		long companyId, boolean active, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug_First(companyId, active,
+			debugMode, orderByComparator);
+	}
+
+	/**
+	* Returns the first admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData fetchByActiveAndCompanyAndDebug_First(
+		long companyId, boolean active, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByActiveAndCompanyAndDebug_First(companyId, active,
+			debugMode, orderByComparator);
+	}
+
+	/**
+	* Returns the last admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData findByActiveAndCompanyAndDebug_Last(
+		long companyId, boolean active, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug_Last(companyId, active,
+			debugMode, orderByComparator);
+	}
+
+	/**
+	* Returns the last admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData fetchByActiveAndCompanyAndDebug_Last(
+		long companyId, boolean active, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByActiveAndCompanyAndDebug_Last(companyId, active,
+			debugMode, orderByComparator);
+	}
+
+	/**
+	* Returns the admin i p validation datas before and after the current admin i p validation data in the ordered set where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param id the primary key of the current admin i p validation data
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a admin i p validation data with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData[] findByActiveAndCompanyAndDebug_PrevAndNext(
+		long id, long companyId, boolean active, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByActiveAndCompanyAndDebug_PrevAndNext(id, companyId,
+			active, debugMode, orderByComparator);
+	}
+
+	/**
+	* Returns all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @return the matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByCompanyAndDebug(
+		long companyId, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByCompanyAndDebug(companyId, debugMode);
+	}
+
+	/**
+	* Returns a range of all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param start the lower bound of the range of admin i p validation datas
+	* @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	* @return the range of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByCompanyAndDebug(
+		long companyId, boolean debugMode, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCompanyAndDebug(companyId, debugMode, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param start the lower bound of the range of admin i p validation datas
+	* @param end the upper bound of the range of admin i p validation datas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<gr.open.marketplace.model.AdminIPValidationData> findByCompanyAndDebug(
+		long companyId, boolean debugMode, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCompanyAndDebug(companyId, debugMode, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData findByCompanyAndDebug_First(
+		long companyId, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByCompanyAndDebug_First(companyId, debugMode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData fetchByCompanyAndDebug_First(
+		long companyId, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByCompanyAndDebug_First(companyId, debugMode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData findByCompanyAndDebug_Last(
+		long companyId, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByCompanyAndDebug_Last(companyId, debugMode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching admin i p validation data, or <code>null</code> if a matching admin i p validation data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData fetchByCompanyAndDebug_Last(
+		long companyId, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByCompanyAndDebug_Last(companyId, debugMode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the admin i p validation datas before and after the current admin i p validation data in the ordered set where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param id the primary key of the current admin i p validation data
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next admin i p validation data
+	* @throws gr.open.marketplace.NoSuchAdminIPValidationDataException if a admin i p validation data with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static gr.open.marketplace.model.AdminIPValidationData[] findByCompanyAndDebug_PrevAndNext(
+		long id, long companyId, boolean debugMode,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			gr.open.marketplace.NoSuchAdminIPValidationDataException {
+		return getPersistence()
+				   .findByCompanyAndDebug_PrevAndNext(id, companyId, debugMode,
+			orderByComparator);
+	}
+
+	/**
 	* Returns all the admin i p validation datas where companyId = &#63;.
 	*
 	* @param companyId the company ID
@@ -604,6 +926,33 @@ public class AdminIPValidationDataUtil {
 	}
 
 	/**
+	* Removes all the admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByActiveAndCompanyAndDebug(long companyId,
+		boolean active, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByActiveAndCompanyAndDebug(companyId, active, debugMode);
+	}
+
+	/**
+	* Removes all the admin i p validation datas where companyId = &#63; and debugMode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByCompanyAndDebug(long companyId, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByCompanyAndDebug(companyId, debugMode);
+	}
+
+	/**
 	* Removes all the admin i p validation datas where companyId = &#63; from the database.
 	*
 	* @param companyId the company ID
@@ -647,6 +996,35 @@ public class AdminIPValidationDataUtil {
 	public static int countByActiveAndCompany(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByActiveAndCompany(companyId, active);
+	}
+
+	/**
+	* Returns the number of admin i p validation datas where companyId = &#63; and active = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param debugMode the debug mode
+	* @return the number of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByActiveAndCompanyAndDebug(long companyId,
+		boolean active, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByActiveAndCompanyAndDebug(companyId, active, debugMode);
+	}
+
+	/**
+	* Returns the number of admin i p validation datas where companyId = &#63; and debugMode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param debugMode the debug mode
+	* @return the number of matching admin i p validation datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByCompanyAndDebug(long companyId, boolean debugMode)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByCompanyAndDebug(companyId, debugMode);
 	}
 
 	/**
